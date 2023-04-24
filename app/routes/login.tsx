@@ -1,0 +1,115 @@
+import type { ActionArgs, LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { Link, useSearchParams } from "@remix-run/react";
+import { ValidatedForm, validationError } from "remix-validated-form";
+import { withZod } from "@remix-validated-form/with-zod";
+import { z } from "zod";
+
+import { createUserSession, getUserId } from "~/utils/session.server";
+import { SubmitButton } from "~/components/SubmitButton";
+import { getUserByUsername, verifyLogin } from "~/models/user.server";
+import { TextInput } from "~/components/TextInput";
+import { safeRedirect } from "~/utils/utils.server";
+
+const schema = z.object({
+  username: z.string().min(1, { message: "Username is required" }),
+  password: z.string().min(1, {
+    message: "Password is required",
+  }),
+  remember: z.literal("on").optional(),
+  redirectTo: z.string().optional(),
+});
+
+const clientValidator = withZod(schema);
+
+export const meta: V2_MetaFunction = () => [{ title: "Login" }];
+
+export async function loader({ request }: LoaderArgs) {
+  const userId = await getUserId(request);
+  if (userId) return redirect("/habits");
+  return null;
+}
+
+export async function action({ request }: ActionArgs) {
+  const serverValidator = withZod(
+    schema.refine(
+      async (data) => {
+        return await verifyLogin(data.username, data.password);
+      },
+      { message: "Invalid username or password.", path: ["password"] }
+    )
+  );
+
+  const formData = await serverValidator.validate(await request.formData());
+
+  if (formData.error) {
+    return validationError(formData.error);
+  }
+
+  const user = await getUserByUsername(formData.data.username);
+
+  if (!user) {
+    throw new Error("zod validation error");
+  }
+
+  const redirectTo = safeRedirect(formData.data.redirectTo, "/habits");
+
+  return createUserSession({
+    request,
+    userId: user.id,
+    remember: formData.data.remember === "on" ? true : false,
+    redirectTo,
+  });
+}
+
+export default function Login() {
+  const [searchParams] = useSearchParams();
+  const redirectTo = searchParams.get("redirectTo") || "/habits";
+
+  return (
+    <div className="grid max-h-fit min-h-screen w-full place-items-center">
+      <div className="grid h-fit w-80 grid-cols-1 items-center gap-4 rounded-md border-2 border-sage-sage6 bg-sage-sage1 px-8 py-6 shadow dark:border-sageDark-sage6 dark:bg-sageDark-sage2">
+        <h1 className="w-full text-center text-3xl">TITLE or LOGO</h1>
+        <ValidatedForm
+          className="w-full space-y-2"
+          validator={clientValidator}
+          method="post"
+        >
+          <input type="hidden" name="redirectTo" value={redirectTo} />
+          <TextInput
+            name="username"
+            label="Username"
+            type="text"
+            autoFocus
+            autoComplete="username"
+          />
+          <TextInput
+            name="password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+          />
+          <div className="flex flex-row items-center space-x-2 text-sm">
+            <input
+              className="rounded bg-sageDark-sage2"
+              id="remember"
+              name="remember"
+              type="checkbox"
+            />
+            <label htmlFor="remember">Remember me</label>
+          </div>
+          <SubmitButton label="Log in" pendingLabel="Logging in..." />
+        </ValidatedForm>
+        <div className="w-full text-center">
+          <span>Don't have an account? </span>
+          <Link
+            className="font-medium text-tealDark-teal9"
+            to={{ pathname: "/signup", search: searchParams.toString() }}
+          >
+            Sign up
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
