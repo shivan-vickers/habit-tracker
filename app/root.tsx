@@ -1,13 +1,13 @@
 import type { LinksFunction, LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  isRouteErrorResponse,
   Links,
   LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  isRouteErrorResponse,
   useRouteError,
 } from "@remix-run/react";
 
@@ -31,7 +31,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="h-full min-w-fit max-w-full bg-sage-sage2 text-sage-sage12 dark:bg-sageDark-sage1 dark:text-sageDark-sage12">
+      <body className="h-full min-w-fit max-w-full bg-sage-sage2 text-sage-sage12 dark:bg-sageDark-sage2 dark:text-sageDark-sage12">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -52,33 +52,27 @@ export default function App() {
 export function ErrorBoundary() {
   let error = useRouteError();
 
+  function errorContainer(heading?: any, content?: any) {
+    return (
+      <Document>
+        <div className="m-12 border border-redDark-red6 bg-redDark-red2 p-4 text-redDark-red9">
+          {heading ? (
+            <h1 className="text-lg font-semibold">{heading}</h1>
+          ) : null}
+          {content ? <pre>{content}</pre> : null}
+        </div>
+      </Document>
+    );
+  }
+
   if (isRouteErrorResponse(error)) {
-    return (
-      <Document>
-        <div>
-          <h1>
-            {error.status} {error.statusText}
-          </h1>
-          <p>{error.data}</p>
-        </div>
-      </Document>
-    );
+    return errorContainer(`${error.status} ${error.statusText}`, error.data);
   } else if (error instanceof Error) {
-    return (
-      <Document>
-        <div>
-          <h1>Error</h1>
-          <p>{error.message}</p>
-          <p>The stack trace is:</p>
-          <pre>{error.stack}</pre>
-        </div>
-      </Document>
-    );
+    return errorContainer(error.message, error.stack);
   } else {
-    return (
-      <Document>
-        <h1>Unknown Error</h1>
-      </Document>
+    return errorContainer(
+      "Unknown Error",
+      "I actually have no idea what happened here. Sorry!"
     );
   }
 }
