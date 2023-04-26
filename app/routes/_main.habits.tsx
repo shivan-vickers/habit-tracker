@@ -1,4 +1,5 @@
-import type { LoaderArgs } from "@remix-run/node";
+import type { ActionArgs, LoaderArgs } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   isRouteErrorResponse,
@@ -6,19 +7,42 @@ import {
   useRouteError,
 } from "@remix-run/react";
 
+import type { Habit } from "@prisma/client";
+
 import { HabitGroupView } from "~/components/HabitGroupView";
 import { getHabitGroupsByUserId } from "~/models/habit-group.server";
 import { getHabitsByGroupId } from "~/models/habit.server";
 import { requireUserId } from "~/utils/session.server";
 
+export type HabitGroupWithHabits = {
+  id: number;
+  name: string;
+  userId: string;
+  habits: Habit[];
+};
+
+export async function action({ request }: ActionArgs) {
+  const formData = await request.formData();
+
+  console.log(formData);
+
+  return redirect(``);
+}
+
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
   const habitGroups = await getHabitGroupsByUserId(userId);
-  const habits = await Promise.all(
-    habitGroups.map((habitGroup) => getHabitsByGroupId(habitGroup.id))
-  );
 
-  return json({ habitGroups, habits });
+  let groupsWithHabits: HabitGroupWithHabits[] = [];
+
+  for (const habitGroup of habitGroups) {
+    groupsWithHabits.push({
+      ...habitGroup,
+      habits: await getHabitsByGroupId(habitGroup.id),
+    });
+  }
+
+  return json({ habitGroups: groupsWithHabits });
 }
 
 export default function Habits() {
@@ -27,17 +51,13 @@ export default function Habits() {
   return (
     <div className="flex w-full justify-center">
       <div className="flex w-fit flex-row flex-wrap gap-2">
-        {data.habitGroups.map((habitGroup) => {
-          const habits = data.habits
-            .flat()
-            .filter((habit) => habit.groupId === habitGroup.id);
-
+        {data.habitGroups.map((group) => {
           return (
             <HabitGroupView
               className="h-fit w-60"
-              key={habitGroup.id}
-              name={habitGroup.name}
-              habits={habits}
+              key={group.id}
+              name={group.name}
+              habits={group.habits}
             />
           );
         })}
