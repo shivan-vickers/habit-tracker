@@ -1,7 +1,8 @@
+import { json } from "@remix-run/node";
 import { useMatches } from "@remix-run/react";
 import { useMemo } from "react";
 
-import type { User } from "@prisma/client";
+import type { User, SafeUser } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
 
@@ -28,6 +29,12 @@ export function safeRedirect(
 }
 
 /**
+ * This helper function helps us returning the accurate HTTP status,
+ * 400 Bad Request, to the client.
+ */
+export const badRequest = <T>(data: T) => json<T>(data, { status: 400 });
+
+/**
  * This base hook is used in other hooks to quickly search for specific data
  * across all loader data using useMatches.
  * @param {string} id The route id
@@ -45,23 +52,29 @@ export function useMatchesData(
 }
 
 function isUser(user: any): user is User {
-  return user && typeof user === "object" && typeof user.email === "string";
+  return user && typeof user === "object" && typeof user.username === "string";
 }
 
-export function useOptionalUser(): User | undefined {
+export function useOptionalUser(): SafeUser | undefined {
   const data = useMatchesData("root");
+
   if (!data || !isUser(data.user)) {
     return undefined;
   }
-  return data.user;
+
+  const safeUser = { id: data.user.id, username: data.user.username };
+
+  return safeUser;
 }
 
-export function useUser(): User {
+export function useUser(): SafeUser {
   const maybeUser = useOptionalUser();
+
   if (!maybeUser) {
     throw new Error(
       "No user found in root loader, but user is required by useUser. If user is optional, try useOptionalUser instead."
     );
   }
+
   return maybeUser;
 }
