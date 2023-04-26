@@ -5,6 +5,11 @@ import { prisma } from "~/utils/prisma.server";
 
 export type { User } from "@prisma/client";
 
+export type SafeUser = {
+  id: User["id"];
+  username: User["username"];
+};
+
 export async function getUserById(id: User["id"]) {
   return prisma.user.findUnique({ where: { id } });
 }
@@ -31,7 +36,7 @@ export async function deleteUserByUsername(username: User["username"]) {
 export async function verifyLogin(
   username: User["username"],
   password: User["passwordHash"]
-) {
+): Promise<SafeUser | null> {
   const userWithPassword = await getUserByUsername(username);
 
   if (!userWithPassword || !userWithPassword.passwordHash) {
@@ -44,7 +49,10 @@ export async function verifyLogin(
     return null;
   }
 
-  const { passwordHash: _password, ...userWithoutPassword } = userWithPassword;
+  const userWithoutPassword = {
+    id: userWithPassword.id,
+    username: userWithPassword.username,
+  };
 
   return userWithoutPassword;
 }
