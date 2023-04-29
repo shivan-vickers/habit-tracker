@@ -12,6 +12,7 @@ import type { ErrorMessage } from "~/components/ErrorContainer";
 import { ErrorContainer } from "~/components/ErrorContainer";
 import { HabitGroupView } from "~/components/HabitGroupView";
 import {
+  createHabitGroup,
   deleteHabitGroupById,
   getHabitGroupsByUserId,
   updateHabitGroupById,
@@ -24,6 +25,7 @@ import {
 } from "~/models/habit.server";
 import { requireUserId } from "~/utils/session.server";
 import { badRequest } from "~/utils/utils.server";
+import { AddGroupBox } from "~/components/AddGroupBox";
 
 export type HabitGroupWithHabits = {
   id: string;
@@ -45,7 +47,7 @@ export async function loader({ request }: LoaderArgs) {
     });
   }
 
-  return json({ habitGroups: habitGroupsWithHabits });
+  return json({ userId, habitGroups: habitGroupsWithHabits });
 }
 
 export async function action({ request }: ActionArgs) {
@@ -61,7 +63,7 @@ export async function action({ request }: ActionArgs) {
   const groupId = form.get("groupId");
   const habitId = form.get("habitId");
 
-  if (intent === "update") {
+  if (intent === "updateHabit") {
     const content = form.get("content");
     const previousContent = form.get("previousContent");
 
@@ -69,21 +71,14 @@ export async function action({ request }: ActionArgs) {
       return json({ status: 100 });
     }
 
-    if (habitId) {
-      const parsedHabitId = parseInt(habitId.toString());
-      if (!parsedHabitId) throw badRequest("Invalid ID");
+    if (!habitId) throw badRequest("Habit ID is required");
 
-      await updateHabitById(parsedHabitId, content.toString());
+    const parsedHabitId = parseInt(habitId.toString());
+    if (!parsedHabitId) throw badRequest("Invalid ID");
 
-      return json(`Updated Habit with ID ${parsedHabitId}`, { status: 200 });
-    } else if (groupId) {
-      await updateHabitGroupById(groupId.toString(), content.toString());
-
-      return json(`Updated group with ID: ${groupId}`, { status: 200 });
-    } else {
-      return badRequest("An ID is required");
-    }
-  } else if (intent === "create") {
+    await updateHabitById(parsedHabitId, content.toString());
+    return json(`Updated Habit with ID ${parsedHabitId}`, { status: 200 });
+  } else if (intent === "createHabit") {
     const content = form.get("content");
     if (!content) return json({ status: 100 });
 
@@ -92,21 +87,49 @@ export async function action({ request }: ActionArgs) {
     const habit = await createHabit(groupId.toString(), content.toString());
 
     return json(`Created new habit with ID: ${habit.id}`, { status: 201 });
-  } else if (intent === "delete") {
-    if (!groupId && !habitId) throw badRequest("An ID is required");
+  } else if (intent === "deleteHabit") {
+    if (!habitId) throw badRequest("Habit ID is required");
 
-    if (groupId) {
-      await deleteHabitGroupById(groupId.toString());
-      return json(`Deleted habit group with ID: ${groupId}`, { status: 200 });
+    const parsedHabitId = parseInt(habitId.toString());
+    if (!parsedHabitId) throw badRequest("Invalid ID");
+
+    await deleteHabitById(parsedHabitId);
+
+    return json(`Deleted habit with ID: ${parsedHabitId}`, { status: 200 });
+  } else if (intent === "updateGroup") {
+    const groupName = form.get("groupName");
+    const previousName = form.get("previousName");
+
+    if (!groupName || groupName === previousName) {
+      return json({ status: 100 });
     }
 
-    if (habitId) {
-      const parsedHabitId = parseInt(habitId.toString());
-      if (!parsedHabitId) throw badRequest("Invalid ID");
+    if (!groupId) throw badRequest("Group ID is required");
 
-      await deleteHabitById(parsedHabitId);
-      return json(`Deleted habit with ID: ${habitId}`, { status: 200 });
-    }
+    await updateHabitGroupById(groupId.toString(), groupName.toString());
+
+    return json(`Updated group with ID: ${groupId}`, { status: 200 });
+  } else if (intent === "createGroup") {
+    const name = form.get("groupName");
+    if (!name) return json({ status: 200 });
+
+    const userId = form.get("userId");
+    if (!userId) throw badRequest("User ID is required");
+
+    const habitGroup = await createHabitGroup(
+      name.toString(),
+      userId.toString()
+    );
+
+    return json(`Created new habit group with ID: ${habitGroup.id}`, {
+      status: 201,
+    });
+  } else if (intent === "deleteGroup") {
+    if (!groupId) throw badRequest("Group ID is required");
+
+    await deleteHabitGroupById(groupId.toString());
+
+    return json(`Deleted habit group with ID: ${groupId}`, { status: 200 });
   } else {
     throw badRequest("Invalid intent");
   }
@@ -116,21 +139,24 @@ export default function Habits() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="flex w-fit flex-row flex-wrap gap-2">
-        {data.habitGroups.map((group) => {
-          return (
-            <HabitGroupView
-              className="h-fit w-60"
-              key={group.id}
-              id={group.id}
-              name={group.name}
-              habits={group.habits}
-            />
-          );
-        })}
+    <>
+      <AddGroupBox className="mx-auto mb-10 w-96 p-1" userId={data.userId} />
+      <div className="mx-auto w-fit">
+        <div className="flex w-fit flex-row flex-wrap gap-2">
+          {data.habitGroups.map((group) => {
+            return (
+              <HabitGroupView
+                className="h-fit w-60"
+                key={group.id}
+                id={group.id}
+                name={group.name}
+                habits={group.habits}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
