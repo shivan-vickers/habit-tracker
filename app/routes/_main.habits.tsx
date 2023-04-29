@@ -1,5 +1,4 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   isRouteErrorResponse,
@@ -10,39 +9,102 @@ import {
 import type { Habit } from "@prisma/client";
 
 import { HabitGroupView } from "~/components/HabitGroupView";
-import { getHabitGroupsByUserId } from "~/models/habit-group.server";
-import { getHabitsByGroupId } from "~/models/habit.server";
+import {
+  deleteHabitGroupById,
+  getHabitGroupsByUserId,
+} from "~/models/habit-group.server";
+import {
+  createHabit,
+  deleteHabitById,
+  getHabitsByGroupId,
+  updateHabitById,
+} from "~/models/habit.server";
 import { requireUserId } from "~/utils/session.server";
+import { badRequest } from "~/utils/utils.server";
 
 export type HabitGroupWithHabits = {
-  id: number;
+  id: string;
   name: string;
   userId: string;
   habits: Habit[];
 };
 
-export async function action({ request }: ActionArgs) {
-  const formData = await request.formData();
-
-  console.log(formData);
-
-  return redirect(``);
-}
-
 export async function loader({ request }: LoaderArgs) {
   const userId = await requireUserId(request);
   const habitGroups = await getHabitGroupsByUserId(userId);
 
-  let groupsWithHabits: HabitGroupWithHabits[] = [];
+  let habitGroupsWithHabits: HabitGroupWithHabits[] = [];
 
   for (const habitGroup of habitGroups) {
-    groupsWithHabits.push({
+    habitGroupsWithHabits.push({
       ...habitGroup,
       habits: await getHabitsByGroupId(habitGroup.id),
     });
   }
 
-  return json({ habitGroups: groupsWithHabits });
+  return json({ habitGroups: habitGroupsWithHabits });
+}
+
+export async function action({ request }: ActionArgs) {
+  const method = request.method;
+
+  if (method !== "POST") {
+    throw json(`Method ${method} is not supported`, { status: 405 });
+  }
+
+  const form = await request.formData();
+
+  const intent = form.get("intent");
+  const groupId = form.get("groupId");
+  const habitId = form.get("habitId");
+
+  if (intent === "update") {
+    const content = form.get("content");
+    const previousContent = form.get("previousContent");
+
+    if (!content || content === previousContent) {
+      return json({ status: 100 });
+    }
+
+    if (!habitId) throw badRequest("Habit ID is required");
+
+    const parsedHabitId = parseInt(habitId.toString());
+    if (!parsedHabitId) throw badRequest("Invalid ID");
+
+    const habit = await updateHabitById(parsedHabitId, content.toString());
+
+    if (habit) {
+      return json(`Updated Habit with ID ${parsedHabitId}`, { status: 200 });
+    } else {
+      return json({ status: 500 });
+    }
+  } else if (intent === "create") {
+    const content = form.get("content");
+    if (!content) return json({ status: 100 });
+
+    if (!groupId) throw badRequest("Group ID is required");
+
+    const habit = await createHabit(groupId.toString(), content.toString());
+
+    return json(`Created new habit with ID: ${habit.id}`, { status: 201 });
+  } else if (intent === "delete") {
+    if (!groupId && !habitId) throw badRequest("An ID is required");
+
+    if (groupId) {
+      await deleteHabitGroupById(groupId.toString());
+      return json(`Deleted habit group with ID: ${groupId}`, { status: 200 });
+    }
+
+    if (habitId) {
+      const parsedHabitId = parseInt(habitId.toString());
+      if (!parsedHabitId) throw badRequest("Invalid ID");
+
+      await deleteHabitById(parsedHabitId);
+      return json(`Deleted habit with ID: ${habitId}`, { status: 200 });
+    }
+  } else {
+    throw badRequest("Invalid intent");
+  }
 }
 
 export default function Habits() {
@@ -56,6 +118,7 @@ export default function Habits() {
             <HabitGroupView
               className="h-fit w-60"
               key={group.id}
+              id={group.id}
               name={group.name}
               habits={group.habits}
             />
