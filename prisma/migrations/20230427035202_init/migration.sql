@@ -9,16 +9,16 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "HabitGroup" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "userId" TEXT,
-    CONSTRAINT "HabitGroup_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+    "userId" TEXT NOT NULL,
+    CONSTRAINT "HabitGroup_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
 CREATE TABLE "Habit" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "groupId" INTEGER NOT NULL,
+    "groupId" TEXT NOT NULL,
     "content" TEXT NOT NULL,
     CONSTRAINT "Habit_groupId_fkey" FOREIGN KEY ("groupId") REFERENCES "HabitGroup" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );

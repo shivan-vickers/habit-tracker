@@ -20,7 +20,7 @@ model User {
 }
 
 model HabitGroup {
-  id     Int     @id @default(autoincrement())
+  id     String  @id @default(cuid())
   name   String
   userId String
   User   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -29,7 +29,7 @@ model HabitGroup {
 
 model Habit {
   id      Int        @id @default(autoincrement())
-  groupId Int
+  groupId String
   group   HabitGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
   content String
   days    Day[]
