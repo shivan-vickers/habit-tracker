@@ -12,10 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Create habit groups
 - Rename habit groups
 - Delete habit groups
-- Drag and sort habit list items, and remember their order
-- Change the colour of habit groups
 - Header and profile icon
 - Sidebar
+- Add day view and functionality to mark completion
+- Script to initialize database at midnight using Netlify functions
+- Possibly need to store local times for users for above
+- Add GitHub commit style chart to show progress over time
+- Some sort of dopaminergic feedback (exp? lvl ups?)
+- Drag and sort habit list items, and remember their order
+- Add ability to change the colour of habit groups
 - Search bar in header and by keyboard shortcut (ctrl + K)
 
 ### Fixed
