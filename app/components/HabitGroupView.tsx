@@ -39,7 +39,7 @@ export function HabitGroupView({
             <HabitListItem id={habit.id} content={habit.content} />
             <ControlButton
               className="h-8 w-8 p-2"
-              intent="delete"
+              intent="deleteHabit"
               name="habitId"
               value={habit.id}
               icon="X"
@@ -60,7 +60,7 @@ export function HabitGroupView({
         />
         <ControlButton
           className="h-9 w-9 p-2"
-          intent="delete"
+          intent="deleteGroup"
           name="groupId"
           value={id}
           icon="Trash"

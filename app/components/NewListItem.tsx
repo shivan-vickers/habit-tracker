@@ -34,7 +34,7 @@ export function NewListItem({ groupId }: NewListItemProps) {
         placeholder="New habit"
         autoComplete="off"
       />
-      <input type="hidden" name="intent" value="create" />
+      <input type="hidden" name="intent" value="createHabit" />
       <input type="hidden" name="groupId" value={groupId} />
     </fetcher.Form>
   );

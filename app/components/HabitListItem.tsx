@@ -17,7 +17,7 @@ export function HabitListItem({ id, content }: HabitListItemProps) {
         defaultValue={content}
         autoComplete="off"
       />
-      <input type="hidden" name="intent" value="update" />
+      <input type="hidden" name="intent" value="updateHabit" />
       <input type="hidden" name="habitId" value={id} />
       <input type="hidden" name="previousContent" value={content} />
     </fetcher.Form>

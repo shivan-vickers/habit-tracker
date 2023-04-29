@@ -13,13 +13,13 @@ export function GroupName({ id, name }: GroupNameProps) {
       <input
         className="w-full border-0 bg-sage-sage2 px-4 font-semibold leading-tight caret-sage-sage12 focus:ring-0 dark:bg-sageDark-sage2 dark:caret-sageDark-sage12"
         type="text"
-        name="content"
+        name="groupName"
         defaultValue={name}
         autoComplete="off"
       />
       <input type="hidden" name="intent" value="update" />
       <input type="hidden" name="groupId" value={id} />
-      <input type="hidden" name="previousContent" value={name} />
+      <input type="hidden" name="previousName" value={name} />
     </fetcher.Form>
   );
 }
