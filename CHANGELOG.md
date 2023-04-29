@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add GitHub commit style chart to show progress over time
 - Some sort of dopaminergic feedback (exp? lvl ups?)
 - Drag and sort habit list items, and remember their order
+- Animations using Framer or formkit/auto-animate
 - Add ability to change the colour of habit groups
 - Search bar in header and by keyboard shortcut (ctrl + K)
 
