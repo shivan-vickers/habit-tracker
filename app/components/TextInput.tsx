@@ -23,7 +23,7 @@ export function TextInput({
         {label}
       </label>
       <input
-        className="w-full rounded bg-sageDark-sage2 text-sm focus:border-tealDark-teal9 focus:ring-0"
+        className="w-full rounded border-sageDark-sage9 bg-sageDark-sage2 text-sm placeholder-sageDark-sage9 focus:border-tealDark-teal9 focus:ring-tealDark-teal9"
         name={name}
         placeholder={label}
         type={type}
