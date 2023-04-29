@@ -2,6 +2,24 @@
 
 This project is an attempt to learn the Remix framework and my first solo attempt at making a full stack web application. At the moment it's just a Google Keep clone but eventually I'd like it to be used to track the development of habits and display your progress similar to applications like [Habitica](https://habitica.com/static/home) and [Fabulous](https://www.thefabulous.co).
 
+CHANGELOG.md is where I am writing the project roadmap.
+
+## What's in the stack
+
+- App deployment with [Netlify](https://www.netlify.com)
+- Database with [SQLite](https://sqlite.org)
+- Username/Password Authentication with [cookie-based sessions](https://remix.run/utils/sessions#md-createcookiesessionstorage)
+- Database ORM with [Prisma](https://prisma.io)
+- Styling with [Tailwind](https://tailwindcss.com/)
+- Code formatting with [Prettier](https://prettier.io)
+- Linting with [ESLint](https://eslint.org)
+- Static Types with [TypeScript](https://typescriptlang.org)
+- Schema validation with [Zod](https://zod.dev)
+- Form validation with [Remix Validated Form](https://www.remix-validated-form.io)
+- Components from [Headless UI](https://headlessui.com)
+- Colors from [Radix UI](https://www.radix-ui.com/colors)
+- Icons from [Lucide](https://lucide.dev)
+
 ## Development
 
 Remix requires at least Node version `14` but I am using the current LTS version of Node which is `18.16.0` for testing and development. I recommend [NVM for Windows](https://github.com/coreybutler/nvm-windows):
@@ -50,3 +68,5 @@ Note: When running the Netlify CLI, file changes will rebuild assets, but you wi
 
 - [Remix Docs](https://remix.run/docs)
 - [Netlify Functions](https://www.netlify.com/products/functions/)
+- [Prisma Docs](https://www.prisma.io/docs)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs/installation)
