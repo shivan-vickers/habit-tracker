@@ -45,7 +45,7 @@ async function main() {
   let habitDivider = 1;
 
   for (const habitData of habitsData) {
-    const assignedGroup = habitDivider > 3 ? habitGroups[0] : habitGroups[1];
+    const assignedGroup = habitDivider < 4 ? habitGroups[0] : habitGroups[1];
 
     await prisma.habit.create({
       data: {
