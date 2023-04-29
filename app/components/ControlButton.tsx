@@ -20,7 +20,7 @@ export function ControlButton({
   const fetcher = useFetcher();
 
   const constructedClassName = clsx(
-    "stroke-sageDark-sage11 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100",
+    "stroke-sage-sage11 dark:stroke-sageDark-sage11 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100",
     className
   );
 
@@ -28,7 +28,7 @@ export function ControlButton({
     <fetcher.Form className="flex items-center" method="post">
       <input type="hidden" name={name} value={value} />
       <button
-        className="rounded-full opacity-0 transition-opacity duration-500 hover:bg-sageDark-sage6 group-hover/card:opacity-100"
+        className="rounded-full opacity-0 transition-opacity duration-500 hover:bg-sage-sage6 group-hover/card:opacity-100 dark:hover:bg-sageDark-sage6"
         name="intent"
         value={intent}
       >
