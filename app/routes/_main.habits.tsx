@@ -1,13 +1,15 @@
 import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
-  isRouteErrorResponse,
   useLoaderData,
   useRouteError,
+  isRouteErrorResponse,
 } from "@remix-run/react";
 
 import type { Habit } from "@prisma/client";
 
+import type { ErrorMessage } from "~/components/ErrorContainer";
+import { ErrorContainer } from "~/components/ErrorContainer";
 import { HabitGroupView } from "~/components/HabitGroupView";
 import {
   deleteHabitGroupById,
@@ -133,25 +135,20 @@ export default function Habits() {
 }
 
 export function ErrorBoundary() {
-  let error = useRouteError();
+  const error = useRouteError();
 
-  function errorContainer(heading?: any, content?: any) {
-    return (
-      <div className="m-12 border border-redDark-red6 bg-redDark-red2 p-4 text-redDark-red9">
-        {heading ? <h1 className="text-lg font-semibold">{heading}</h1> : null}
-        {content ? <pre>{content}</pre> : null}
-      </div>
-    );
-  }
+  let { heading, content }: ErrorMessage = {
+    heading: "Unknown Error",
+    content: "I actually have no idea what happened here. Sorry!",
+  };
 
   if (isRouteErrorResponse(error)) {
-    return errorContainer(`${error.status} ${error.statusText}`, error.data);
+    heading = ` ${error.status} ${error.statusText}`;
+    content = error.data;
   } else if (error instanceof Error) {
-    return errorContainer(error.message, error.stack);
-  } else {
-    return errorContainer(
-      "Unknown Error",
-      "I actually have no idea what happened here. Sorry!"
-    );
+    heading = error.message;
+    content = error.stack;
   }
+
+  return <ErrorContainer heading={heading} content={content} />;
 }
