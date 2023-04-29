@@ -11,7 +11,7 @@ export function GroupName({ id, name }: GroupNameProps) {
   return (
     <fetcher.Form method="post" onBlur={(e) => fetcher.submit(e.currentTarget)}>
       <input
-        className="w-full border-0 bg-sageDark-sage2 px-4 font-semibold leading-tight caret-sageDark-sage12 focus:ring-0"
+        className="w-full border-0 bg-sage-sage2 px-4 font-semibold leading-tight caret-sage-sage12 focus:ring-0 dark:bg-sageDark-sage2 dark:caret-sageDark-sage12"
         type="text"
         name="content"
         defaultValue={name}

@@ -23,9 +23,12 @@ export function NewListItem({ groupId }: NewListItemProps) {
       ref={ref}
       onBlur={(e) => fetcher.submit(e.currentTarget)}
     >
-      <PlusIcon className="w-6 text-sageDark-sage11" size={18} />
+      <PlusIcon
+        className="w-6 text-sage-sage11 dark:text-sageDark-sage11"
+        size={18}
+      />
       <input
-        className="w-full border-0 bg-sageDark-sage2 placeholder-sageDark-sage9 caret-sageDark-sage12 focus:ring-0"
+        className="w-full border-0 bg-sage-sage2 placeholder-sage-sage9 caret-sage-sage12 focus:ring-0 dark:bg-sageDark-sage2 dark:placeholder-sageDark-sage9 dark:caret-sageDark-sage12"
         type="text"
         name="content"
         placeholder="New habit"

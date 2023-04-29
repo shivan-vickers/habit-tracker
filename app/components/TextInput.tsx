@@ -23,7 +23,7 @@ export function TextInput({
         {label}
       </label>
       <input
-        className="w-full rounded border-sageDark-sage9 bg-sageDark-sage2 text-sm placeholder-sageDark-sage9 focus:border-tealDark-teal9 focus:ring-tealDark-teal9"
+        className="w-full rounded border-sage-sage9 bg-sage-sage2 text-sm placeholder-sage-sage9 focus:border-teal-teal9 focus:ring-teal-teal9 dark:border-sageDark-sage9 dark:bg-sageDark-sage2 dark:placeholder-sageDark-sage9 dark:focus:border-tealDark-teal9 dark:focus:ring-tealDark-teal9"
         name={name}
         placeholder={label}
         type={type}
@@ -34,7 +34,9 @@ export function TextInput({
         {...getInputProps({ id: name })}
       />
       {error ? (
-        <span className="text-xs text-redDark-red11">{error}</span>
+        <span className="text-xs text-redDark-red11 dark:text-redDark-red11">
+          {error}
+        </span>
       ) : null}
     </div>
   );

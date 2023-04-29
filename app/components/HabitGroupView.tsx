@@ -32,10 +32,10 @@ export function HabitGroupView({
       <ul className="flex max-h-96 flex-col overflow-auto">
         {habits.map((habit) => (
           <li
-            className="group/item my-px flex flex-row items-center justify-between border-0 border-sageDark-sage7 px-2 hover:my-0 hover:border-b hover:border-t"
+            className="group/item my-px flex flex-row items-center justify-between border-0 border-sage-sage7 px-2 hover:my-0 hover:border-b hover:border-t dark:border-sageDark-sage7"
             key={habit.id}
           >
-            <GripVerticalIcon className="h-6 w-6 stroke-sageDark-sage11 opacity-0 group-hover/item:opacity-100" />
+            <GripVerticalIcon className="h-6 w-6 stroke-sage-sage11 opacity-0 group-hover/item:opacity-100 dark:stroke-sageDark-sage11" />
             <HabitListItem id={habit.id} content={habit.content} />
             <ControlButton
               className="h-8 w-8 p-2"

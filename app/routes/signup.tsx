@@ -106,7 +106,7 @@ export default function Login() {
         <div className="w-full text-center">
           <span>Already have an account? </span>
           <Link
-            className="font-medium text-tealDark-teal9"
+            className="font-medium text-teal-teal9 dark:text-tealDark-teal9"
             to={{ pathname: "/login", search: searchParams.toString() }}
           >
             Log in

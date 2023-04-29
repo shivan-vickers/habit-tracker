@@ -9,7 +9,7 @@ export type ErrorMessage = {
 
 export function ErrorContainer({ heading, content }: ErrorMessage) {
   return (
-    <div className="m-12 border border-redDark-red6 bg-redDark-red2 p-4 text-redDark-red9">
+    <div className="m-12 border border-red-red6 bg-red-red2 p-4 text-red-red9 dark:border-redDark-red6 dark:bg-redDark-red2 dark:text-redDark-red9">
       {heading ? <h1 className="text-lg font-semibold">{heading}</h1> : null}
       {content ? <pre>{content}</pre> : null}
     </div>

@@ -91,7 +91,7 @@ export default function Login() {
           />
           <div className="flex flex-row items-center space-x-2 text-sm">
             <input
-              className="rounded bg-sageDark-sage2"
+              className="rounded bg-sage-sage2 text-teal-teal9 checked:bg-teal-teal9 focus:ring-teal-teal9 dark:bg-sageDark-sage2 dark:text-tealDark-teal9 dark:checked:bg-tealDark-teal9 dark:focus:ring-tealDark-teal9"
               id="remember"
               name="remember"
               type="checkbox"
@@ -103,7 +103,7 @@ export default function Login() {
         <div className="w-full text-center">
           <span>Don't have an account? </span>
           <Link
-            className="font-medium text-tealDark-teal9"
+            className="font-medium text-teal-teal9 dark:text-tealDark-teal9"
             to={{ pathname: "/signup", search: searchParams.toString() }}
           >
             Sign up
