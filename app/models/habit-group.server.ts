@@ -11,6 +11,11 @@ export async function getHabitGroupsByUserId(userId: User["id"]) {
   return prisma.habitGroup.findMany({ where: { userId } });
 }
 
-export async function updateHabitGroupById({ id, name }: HabitGroup) {}
+export async function updateHabitGroupById(
+  id: HabitGroup["id"],
+  name: HabitGroup["name"]
+) {
+  return prisma.habitGroup.update({ where: { id }, data: { name } });
+}
 
 export async function deleteHabitGroupById(id: HabitGroup["id"]) {}

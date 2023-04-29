@@ -5,6 +5,7 @@ import { GripVerticalIcon } from "lucide-react";
 import { HabitListItem } from "./HabitListItem";
 import { NewListItem } from "./NewListItem";
 import { ControlButton } from "./ControlButton";
+import { GroupName } from "./GroupName";
 
 export type HabitGroupViewProps = {
   className?: string;
@@ -22,11 +23,12 @@ export function HabitGroupView({
   return (
     <div
       className={clsx(
-        "group/card rounded-lg border border-sage-sage7 py-3 hover:shadow-md dark:border-sageDark-sage7",
+        "group/card rounded-lg border border-sage-sage8 py-3 hover:shadow-md dark:border-sageDark-sage8",
         className
       )}
     >
-      <p className="px-4 pb-2 font-semibold">{name}</p>
+      <GroupName id={id} name={name} />
+      {/* <p className="px-4 pb-2 font-semibold">{name}</p> */}
       <ul className="flex max-h-96 flex-col overflow-auto">
         {habits.map((habit) => (
           <li

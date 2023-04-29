@@ -12,6 +12,7 @@ import { HabitGroupView } from "~/components/HabitGroupView";
 import {
   deleteHabitGroupById,
   getHabitGroupsByUserId,
+  updateHabitGroupById,
 } from "~/models/habit-group.server";
 import {
   createHabit,
@@ -66,17 +67,19 @@ export async function action({ request }: ActionArgs) {
       return json({ status: 100 });
     }
 
-    if (!habitId) throw badRequest("Habit ID is required");
+    if (habitId) {
+      const parsedHabitId = parseInt(habitId.toString());
+      if (!parsedHabitId) throw badRequest("Invalid ID");
 
-    const parsedHabitId = parseInt(habitId.toString());
-    if (!parsedHabitId) throw badRequest("Invalid ID");
+      await updateHabitById(parsedHabitId, content.toString());
 
-    const habit = await updateHabitById(parsedHabitId, content.toString());
-
-    if (habit) {
       return json(`Updated Habit with ID ${parsedHabitId}`, { status: 200 });
+    } else if (groupId) {
+      await updateHabitGroupById(groupId.toString(), content.toString());
+
+      return json(`Updated group with ID: ${groupId}`, { status: 200 });
     } else {
-      return json({ status: 500 });
+      return badRequest("An ID is required");
     }
   } else if (intent === "create") {
     const content = form.get("content");
