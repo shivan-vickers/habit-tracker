@@ -17,7 +17,7 @@ export function GroupName({ id, name }: GroupNameProps) {
         defaultValue={name}
         autoComplete="off"
       />
-      <input type="hidden" name="intent" value="update" />
+      <input type="hidden" name="intent" value="updateGroup" />
       <input type="hidden" name="groupId" value={id} />
       <input type="hidden" name="previousName" value={name} />
     </fetcher.Form>
