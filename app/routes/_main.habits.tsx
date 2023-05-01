@@ -64,6 +64,14 @@ export async function action({ request }: ActionArgs) {
   const groupId = form.get("groupId");
   const habitId = form.get("habitId");
 
+  // Supported intents:
+  //   updateHabit
+  //   deleteHabit
+  //   createHabit
+  //   updateGroup
+  //   deleteGroup
+  //   createGroup
+
   if (intent === "updateHabit") {
     const content = form.get("content");
     const previousContent = form.get("previousContent");
@@ -153,7 +161,7 @@ export default function Habits() {
 
   return (
     <>
-      <AddGroupBox className="mx-auto mb-10 w-96 p-1" userId={data.userId} />
+      <AddGroupBox className="mx-auto mb-10 w-96 p-1" />
       <div className="mx-auto w-fit">
         <Masonry
           items={items}
