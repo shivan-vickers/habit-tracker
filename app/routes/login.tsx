@@ -9,7 +9,7 @@ import { createUserSession, getUserId } from "~/utils/session.server";
 import { SubmitButton } from "~/components/SubmitButton";
 import { getUserByUsername, verifyLogin } from "~/models/user.server";
 import { TextInput } from "~/components/TextInput";
-import { safeRedirect } from "~/utils/utils.server";
+import { safeRedirect } from "~/utils/utils";
 
 const schema = z.object({
   username: z.string().min(1, { message: "Username is required" }),

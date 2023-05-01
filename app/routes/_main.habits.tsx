@@ -25,7 +25,7 @@ import {
   updateHabitById,
 } from "~/models/habit.server";
 import { requireUserId } from "~/utils/session.server";
-import { badRequest } from "~/utils/utils.server";
+import { badRequest } from "~/utils/utils";
 import { AddGroupBox } from "~/components/AddGroupBox";
 
 export type HabitGroupWithHabits = {

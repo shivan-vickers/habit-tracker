@@ -9,7 +9,7 @@ import { createUserSession, getUserId } from "~/utils/session.server";
 import { SubmitButton } from "~/components/SubmitButton";
 import { createUser, getUserByUsername } from "~/models/user.server";
 import { TextInput } from "~/components/TextInput";
-import { safeRedirect } from "~/utils/utils.server";
+import { safeRedirect } from "~/utils/utils";
 
 const schema = z
   .object({
