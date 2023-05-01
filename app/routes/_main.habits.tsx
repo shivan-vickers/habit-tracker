@@ -7,6 +7,7 @@ import {
 } from "@remix-run/react";
 
 import type { Habit } from "@prisma/client";
+import { Masonry } from "react-plock";
 
 import type { ErrorMessage } from "~/components/ErrorContainer";
 import { ErrorContainer } from "~/components/ErrorContainer";
@@ -138,23 +139,31 @@ export async function action({ request }: ActionArgs) {
 export default function Habits() {
   const data = useLoaderData<typeof loader>();
 
+  const items = data.habitGroups.map((group) => {
+    return (
+      <HabitGroupView
+        className="h-fit w-60"
+        key={group.id}
+        id={group.id}
+        name={group.name}
+        habits={group.habits}
+      />
+    );
+  });
+
   return (
     <>
       <AddGroupBox className="mx-auto mb-10 w-96 p-1" userId={data.userId} />
       <div className="mx-auto w-fit">
-        <div className="flex w-fit flex-row flex-wrap gap-2">
-          {data.habitGroups.map((group) => {
-            return (
-              <HabitGroupView
-                className="h-fit w-60"
-                key={group.id}
-                id={group.id}
-                name={group.name}
-                habits={group.habits}
-              />
-            );
-          })}
-        </div>
+        <Masonry
+          items={items}
+          config={{
+            columns: [1, 2, 3, 4, 5],
+            gap: [12, 12, 12, 12, 12],
+            media: [640, 768, 1024, 1280, 1536],
+          }}
+          render={(item, idx) => <div key={idx}>{item}</div>}
+        />
       </div>
     </>
   );

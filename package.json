@@ -43,6 +43,7 @@
     "lucide-react": "^0.161.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-plock": "^3.0.2",
     "remix-validated-form": "^4.6.11",
     "zod": "^3.21.4"
   },
