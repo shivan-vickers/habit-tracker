@@ -13,7 +13,7 @@ import {
 
 import type { ErrorMessage } from "./components/ErrorContainer";
 import { ErrorContainer } from "./components/ErrorContainer";
-import stylesheet from "~/styles/tailwind.css";
+import stylesheet from "./styles/tailwind.css";
 import { getUser } from "./utils/session.server";
 
 export const links: LinksFunction = () => {
