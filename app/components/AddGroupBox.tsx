@@ -2,15 +2,16 @@ import { useFetcher } from "@remix-run/react";
 import clsx from "clsx";
 import { PlusIcon } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { useUser } from "~/utils/utils";
 
 export type AddGroupBoxProps = {
   className?: string;
-  userId: string;
 };
 
-export function AddGroupBox({ className, userId }: AddGroupBoxProps) {
+export function AddGroupBox({ className }: AddGroupBoxProps) {
   const fetcher = useFetcher();
   const ref = useRef<HTMLFormElement>(null);
+  const user = useUser();
 
   useEffect(() => {
     if (fetcher.state === "submitting") {
@@ -28,7 +29,7 @@ export function AddGroupBox({ className, userId }: AddGroupBoxProps) {
       ref={ref}
     >
       <input type="hidden" name="intent" value="createGroup" />
-      <input type="hidden" name="userId" value={userId} />
+      <input type="hidden" name="userId" value={user.id} />
       <input
         className="w-full border-0 bg-sage-sage2 placeholder-sage-sage9 caret-sage-sage12 focus:ring-0 dark:bg-sageDark-sage2 dark:placeholder-sage-sage9 dark:caret-sageDark-sage12"
         type="text"
