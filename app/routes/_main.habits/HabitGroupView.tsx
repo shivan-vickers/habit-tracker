@@ -2,10 +2,10 @@ import type { Habit } from "@prisma/client";
 import { clsx } from "clsx";
 import { GripVerticalIcon } from "lucide-react";
 
-import { HabitListItem } from "./HabitListItem";
-import { NewListItem } from "./NewListItem";
 import { ControlButton } from "./ControlButton";
 import { GroupName } from "./GroupName";
+import { HabitListItem } from "./HabitListItem";
+import { NewListItem } from "./NewListItem";
 
 export type HabitGroupViewProps = {
   className?: string;

@@ -5,10 +5,10 @@ import { ValidatedForm, validationError } from "remix-validated-form";
 import { withZod } from "@remix-validated-form/with-zod";
 import { z } from "zod";
 
-import { createUserSession, getUserId } from "~/utils/session.server";
-import { SubmitButton } from "~/components/SubmitButton";
 import { getUserByUsername, verifyLogin } from "~/models/user.server";
-import { TextInput } from "~/components/TextInput";
+import { SubmitButton } from "~/routes/_auth/SubmitButton";
+import { TextInput } from "~/routes/_auth/TextInput";
+import { createUserSession, getUserId } from "~/utils/session.server";
 import { safeRedirect } from "~/utils/utils";
 
 const schema = z.object({
