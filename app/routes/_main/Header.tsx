@@ -9,7 +9,7 @@ import { useOptionalUser } from "~/utils/utils";
 export function Header() {
   const user = useOptionalUser();
 
-  const dicebearAvatar = `https://api.dicebear.com/6.x/notionists-neutral/svg?seed=${user?.username}&backgroundColor=10b3a3&radius=50`;
+  const dicebearAvatar = `https://api.dicebear.com/6.x/notionists-neutral/svg?seed=${user?.username}&backgroundColor=10b3a3&radius=50&size=80`;
 
   return (
     <div className="fixed top-0 flex h-16 w-full flex-row items-center justify-between bg-sage-sage2 px-6 shadow-md shadow-blackA-blackA8 dark:bg-sageDark-sage2">
