@@ -3,7 +3,8 @@ import * as Avatar from "@radix-ui/react-avatar";
 import * as Popover from "@radix-ui/react-popover";
 
 import { useOptionalUser } from "~/utils/utils";
-import { LogOutIcon, SwordsIcon } from "lucide-react";
+import { LogOutIcon } from "lucide-react";
+import { Logo } from "./Logo";
 
 export function Header() {
   const user = useOptionalUser();
@@ -12,10 +13,7 @@ export function Header() {
 
   return (
     <div className="fixed top-0 flex h-16 w-full flex-row items-center justify-between bg-sage-sage2 px-6 shadow-md shadow-blackA-blackA8 dark:bg-sageDark-sage2">
-      <div className="flex flex-row items-center gap-6">
-        <SwordsIcon className="h-10 w-10 fill-teal-teal9 stroke-teal-teal9 dark:fill-tealDark-teal9 dark:stroke-tealDark-teal9" />
-        <h1 className="text-2xl font-medium">Dailies</h1>
-      </div>
+      <Logo size="md" />
       <div className="flex flex-row items-center gap-6">
         <nav className="flex flex-row gap-6">
           <NavLink
@@ -48,10 +46,10 @@ export function Header() {
           </Popover.Trigger>
           <Popover.Portal>
             <Popover.Content
-              className="mr-4 h-44 w-72 rounded-2xl bg-sage-sage5 pt-2 shadow-lg shadow-blackA-blackA8 dark:bg-sageDark-sage5"
+              className="mr-4 h-44 w-72 rounded-2xl bg-sage-sage4 pt-2 shadow-lg shadow-blackA-blackA8 dark:bg-sageDark-sage5"
               sideOffset={20}
             >
-              <div className="mb mx-auto mb-[2px] flex w-[17rem] flex-row items-center rounded-xl bg-sage-sage1 dark:bg-sageDark-sage1">
+              <div className="mx-auto mb-[2px] flex w-[17rem] flex-row items-center rounded-xl bg-sage-sage8 dark:bg-sageDark-sage1">
                 <Avatar.Root className="m-2 h-20 w-20 overflow-hidden rounded-full p-1">
                   <Avatar.AvatarImage
                     src={dicebearAvatar}
@@ -68,8 +66,8 @@ export function Header() {
                   className="flex w-full flex-row items-center overflow-hidden border-b border-sage-sage8 hover:bg-sage-sage6 dark:border-sageDark-sage8 dark:hover:bg-sageDark-sage6"
                   type="submit"
                 >
-                  <LogOutIcon className="m-2 h-6 w-20" />
-                  <p className="ml-2 font-semibold">Sign out</p>
+                  <LogOutIcon className="mx-4 my-2 h-6 w-20" />
+                  <p className="font-semibold">Sign out</p>
                 </button>
               </Form>
             </Popover.Content>

@@ -67,49 +67,47 @@ export default function Login() {
   const redirectTo = searchParams.get("redirectTo") || "/habits";
 
   return (
-    <div className="grid max-h-fit min-h-screen w-full place-items-center">
-      <div className="grid h-fit w-80 grid-cols-1 items-center gap-4 rounded-md border-2 border-sage-sage6 bg-sage-sage1 px-8 py-6 shadow-md shadow-blackA-blackA10 dark:border-sageDark-sage6 dark:bg-sageDark-sage2">
-        <h1 className="w-full text-center text-3xl">TITLE or LOGO</h1>
-        <ValidatedForm
-          className="w-full space-y-2"
-          validator={clientValidator}
-          method="post"
-        >
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <TextInput
-            name="username"
-            label="Username"
-            type="text"
-            autoFocus
-            autoComplete="username"
+    <>
+      <h1 className="text-center text-2xl">Welcome back!</h1>
+      <ValidatedForm
+        className="w-full space-y-2"
+        validator={clientValidator}
+        method="post"
+      >
+        <input type="hidden" name="redirectTo" value={redirectTo} />
+        <TextInput
+          name="username"
+          label="Username"
+          type="text"
+          autoFocus
+          autoComplete="username"
+        />
+        <TextInput
+          name="password"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+        />
+        <div className="flex flex-row items-center space-x-2 text-sm">
+          <input
+            className="rounded bg-sage-sage2 text-teal-teal9 checked:bg-teal-teal9 focus:ring-teal-teal9 dark:bg-sageDark-sage2 dark:text-tealDark-teal9 dark:checked:bg-tealDark-teal9 dark:focus:ring-tealDark-teal9"
+            id="remember"
+            name="remember"
+            type="checkbox"
           />
-          <TextInput
-            name="password"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-          />
-          <div className="flex flex-row items-center space-x-2 text-sm">
-            <input
-              className="rounded bg-sage-sage2 text-teal-teal9 checked:bg-teal-teal9 focus:ring-teal-teal9 dark:bg-sageDark-sage2 dark:text-tealDark-teal9 dark:checked:bg-tealDark-teal9 dark:focus:ring-tealDark-teal9"
-              id="remember"
-              name="remember"
-              type="checkbox"
-            />
-            <label htmlFor="remember">Remember me</label>
-          </div>
-          <SubmitButton label="Log in" pendingLabel="Logging in..." />
-        </ValidatedForm>
-        <div className="w-full text-center">
-          <span>Don't have an account? </span>
-          <Link
-            className="font-medium text-teal-teal9 dark:text-tealDark-teal9"
-            to={{ pathname: "/signup", search: searchParams.toString() }}
-          >
-            Sign up
-          </Link>
+          <label htmlFor="remember">Remember me</label>
         </div>
+        <SubmitButton label="Log in" pendingLabel="Logging in..." />
+      </ValidatedForm>
+      <div className="w-full text-center">
+        <span>Don't have an account? </span>
+        <Link
+          className="font-medium text-teal-teal9 dark:text-tealDark-teal9"
+          to={{ pathname: "/signup", search: searchParams.toString() }}
+        >
+          Sign up
+        </Link>
       </div>
-    </div>
+    </>
   );
 }

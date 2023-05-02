@@ -71,48 +71,46 @@ export default function Login() {
   const redirectTo = searchParams.get("redirectTo") || "/habits";
 
   return (
-    <div className="grid max-h-fit min-h-screen w-full place-items-center">
-      <div className="grid h-fit w-80 grid-cols-1 items-center gap-4 rounded-md border-2 border-sage-sage6 bg-sage-sage1 px-8 py-6 shadow-md shadow-blackA-blackA10 dark:border-sageDark-sage6 dark:bg-sageDark-sage2">
-        <h1 className="w-full text-center text-3xl">TITLE or LOGO</h1>
-        <ValidatedForm
-          className="w-full space-y-2"
-          validator={clientValidator}
-          method="post"
+    <>
+      <h1 className="text-center text-2xl">Create an account</h1>
+      <ValidatedForm
+        className="w-full space-y-2"
+        validator={clientValidator}
+        method="post"
+      >
+        <input type="hidden" name="redirectTo" value={redirectTo} />
+        <TextInput
+          name="username"
+          label="Username"
+          type="text"
+          autoFocus
+          autoComplete="username"
+        />
+        <TextInput
+          name="password"
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+        />
+        <TextInput
+          name="passwordConfirm"
+          label="Confirm Password"
+          type="password"
+        />
+        <SubmitButton
+          label="Create account"
+          pendingLabel="Creating account..."
+        />
+      </ValidatedForm>
+      <div className="w-full text-center">
+        <span>Already have an account? </span>
+        <Link
+          className="font-medium text-teal-teal9 dark:text-tealDark-teal9"
+          to={{ pathname: "/login", search: searchParams.toString() }}
         >
-          <input type="hidden" name="redirectTo" value={redirectTo} />
-          <TextInput
-            name="username"
-            label="Username"
-            type="text"
-            autoFocus
-            autoComplete="username"
-          />
-          <TextInput
-            name="password"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-          />
-          <TextInput
-            name="passwordConfirm"
-            label="Confirm Password"
-            type="password"
-          />
-          <SubmitButton
-            label="Create account"
-            pendingLabel="Creating account..."
-          />
-        </ValidatedForm>
-        <div className="w-full text-center">
-          <span>Already have an account? </span>
-          <Link
-            className="font-medium text-teal-teal9 dark:text-tealDark-teal9"
-            to={{ pathname: "/login", search: searchParams.toString() }}
-          >
-            Log in
-          </Link>
-        </div>
+          Log in
+        </Link>
       </div>
-    </div>
+    </>
   );
 }
