@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Modify env variables for prisma to use sqlite during development
 - Animations using Framer or formkit/auto-animate
 - Drag and sort habit list items, and remember their order
 - Custom masonry layout
