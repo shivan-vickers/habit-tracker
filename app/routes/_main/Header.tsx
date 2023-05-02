@@ -31,6 +31,7 @@ export function Header() {
           <Link
             to="https://github.com/shivan-vickers/habit-tracker"
             reloadDocument
+            target="_blank"
           >
             GitHub
           </Link>
