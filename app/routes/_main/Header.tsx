@@ -1,10 +1,10 @@
 import { Form, NavLink, Link } from "@remix-run/react";
 import * as Avatar from "@radix-ui/react-avatar";
 import * as Popover from "@radix-ui/react-popover";
-
-import { useOptionalUser } from "~/utils/utils";
 import { LogOutIcon } from "lucide-react";
-import { Logo } from "./Logo";
+
+import { Logo } from "~/components/Logo";
+import { useOptionalUser } from "~/utils/utils";
 
 export function Header() {
   const user = useOptionalUser();

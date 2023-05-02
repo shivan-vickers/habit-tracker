@@ -2,6 +2,7 @@ import { useFetcher } from "@remix-run/react";
 import clsx from "clsx";
 import { PlusIcon } from "lucide-react";
 import { useEffect, useRef } from "react";
+
 import { useUser } from "~/utils/utils";
 
 export type AddGroupBoxProps = {
