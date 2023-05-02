@@ -83,7 +83,6 @@ export default function Login() {
           name="username"
           label="Username"
           type="text"
-          autoFocus
           autoComplete="username"
         />
         <TextInput
