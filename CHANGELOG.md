@@ -11,8 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Animations using Framer or formkit/auto-animate
 - Drag and sort habit list items, and remember their order
-- Header and profile icon
-- Sidebar
+- Custom masonry layout
 - Add ability to change the colour of habit groups
 - Add day view and functionality to mark completion
 - Add group repeat frequency

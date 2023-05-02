@@ -160,8 +160,8 @@ export default function Habits() {
   });
 
   return (
-    <>
-      <AddGroupBox className="mx-auto mb-10 w-96 p-1" />
+    <div className="mt-16 border-t border-sage-sage8 dark:border-sageDark-sage8">
+      <AddGroupBox className="mx-auto mb-14 mt-10 w-96 p-1 shadow-md shadow-blackA-blackA10" />
       <div className="mx-auto w-fit">
         <Masonry
           items={items}
@@ -173,7 +173,7 @@ export default function Habits() {
           render={(item, idx) => <div key={idx}>{item}</div>}
         />
       </div>
-    </>
+    </div>
   );
 }
 

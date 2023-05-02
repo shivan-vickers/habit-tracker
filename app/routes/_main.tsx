@@ -1,23 +1,15 @@
-import {
-  Form,
-  Outlet,
-  isRouteErrorResponse,
-  useRouteError,
-} from "@remix-run/react";
+import { Outlet, isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
 import type { ErrorMessage } from "~/components/ErrorContainer";
 import { ErrorContainer } from "~/components/ErrorContainer";
+import { Header } from "~/components/Header";
 
 export default function Main() {
   return (
-    <div>
-      <p>logged in</p>
-      <Form action="/logout" method="post">
-        <button type="submit">Logout</button>
-      </Form>
-      <Sidebar />
+    <>
+      <Header />
       <Outlet />
-    </div>
+    </>
   );
 }
 
