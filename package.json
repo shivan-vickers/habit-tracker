@@ -15,6 +15,7 @@
     "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint .",
     "migrate": "npx prisma migrate dev",
     "migrate-reset": "npx prisma migrate reset",
+    "postinstall": "prisma generate",
     "start": "cross-env NODE_ENV=production netlify dev",
     "typecheck": "tsc"
   },
