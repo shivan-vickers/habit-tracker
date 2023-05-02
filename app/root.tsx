@@ -33,7 +33,7 @@ function Document({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="h-full min-w-fit max-w-full bg-sage-sage2 text-sage-sage12 dark:bg-sageDark-sage2 dark:text-sageDark-sage12">
+      <body className="h-full min-w-fit max-w-full bg-sage-sage2 text-sage-sage12 selection:bg-teal-teal8 selection:text-sage-sage12 dark:bg-sageDark-sage2 dark:text-sageDark-sage12 dark:selection:bg-tealDark-teal11 dark:selection:text-sageDark-sage2 ">
         {children}
         <ScrollRestoration />
         <Scripts />
