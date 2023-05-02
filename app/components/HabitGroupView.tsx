@@ -23,12 +23,11 @@ export function HabitGroupView({
   return (
     <div
       className={clsx(
-        "group/card rounded-lg border border-sage-sage8 py-3 hover:shadow-md dark:border-sageDark-sage8",
+        "group/card rounded-lg border border-sage-sage8 py-3 shadow-blackA-blackA10 hover:shadow-md dark:border-sageDark-sage8",
         className
       )}
     >
       <GroupName id={id} name={name} />
-      {/* <p className="px-4 pb-2 font-semibold">{name}</p> */}
       <ul className="flex max-h-96 flex-col overflow-auto">
         {habits.map((habit) => (
           <li
@@ -38,7 +37,7 @@ export function HabitGroupView({
             <GripVerticalIcon className="h-6 w-6 stroke-sage-sage11 opacity-0 group-hover/item:opacity-100 dark:stroke-sageDark-sage11" />
             <HabitListItem id={habit.id} content={habit.content} />
             <ControlButton
-              className="h-8 w-8 p-2"
+              className="h-8 w-8 p-2 group-hover/item:opacity-100"
               intent="deleteHabit"
               name="habitId"
               value={habit.id}
@@ -52,14 +51,14 @@ export function HabitGroupView({
       </ul>
       <div className="flex flex-row items-center justify-between px-2">
         <ControlButton
-          className="h-9 w-9 p-2"
+          className="h-9 w-9 p-2 transition-opacity duration-500 group-hover/card:opacity-100"
           intent="changeColor"
           name="groupId"
           value={id}
           icon="Pallette"
         />
         <ControlButton
-          className="h-9 w-9 p-2"
+          className="h-9 w-9 p-2 transition-opacity duration-500 group-hover/card:opacity-100"
           intent="deleteGroup"
           name="groupId"
           value={id}

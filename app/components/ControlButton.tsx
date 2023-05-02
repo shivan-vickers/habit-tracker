@@ -20,7 +20,7 @@ export function ControlButton({
   const fetcher = useFetcher();
 
   const constructedClassName = clsx(
-    "stroke-sage-sage11 dark:stroke-sageDark-sage11 opacity-0 transition-opacity duration-500 group-hover/card:opacity-100",
+    "stroke-sage-sage11 dark:stroke-sageDark-sage11 opacity-0",
     className
   );
 
