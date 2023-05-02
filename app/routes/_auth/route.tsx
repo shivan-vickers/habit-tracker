@@ -4,7 +4,7 @@ import { Logo } from "~/components/Logo";
 export default function Auth() {
   return (
     <>
-      <div className="absolute left-3 top-3">
+      <div className="absolute left-6 top-3">
         <Logo size="md" />
       </div>
       <div className="flex max-h-fit min-h-screen w-full flex-col items-center justify-center gap-4 bg-gradient-to-t from-teal-teal4 from-5% to-sage-sage2 to-40% dark:from-tealDark-teal2 dark:from-5% dark:to-sageDark-sage2 dark:to-40%">
