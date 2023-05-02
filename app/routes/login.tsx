@@ -68,7 +68,7 @@ export default function Login() {
 
   return (
     <div className="grid max-h-fit min-h-screen w-full place-items-center">
-      <div className="grid h-fit w-80 grid-cols-1 items-center gap-4 rounded-md border-2 border-sage-sage6 bg-sage-sage1 px-8 py-6 shadow dark:border-sageDark-sage6 dark:bg-sageDark-sage2">
+      <div className="grid h-fit w-80 grid-cols-1 items-center gap-4 rounded-md border-2 border-sage-sage6 bg-sage-sage1 px-8 py-6 shadow-md shadow-blackA-blackA10 dark:border-sageDark-sage6 dark:bg-sageDark-sage2">
         <h1 className="w-full text-center text-3xl">TITLE or LOGO</h1>
         <ValidatedForm
           className="w-full space-y-2"
