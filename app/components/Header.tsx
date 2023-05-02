@@ -14,11 +14,22 @@ export function Header() {
     <div className="fixed top-0 flex h-16 w-full flex-row items-center justify-between bg-sage-sage2 px-6 shadow-md shadow-blackA-blackA8 dark:bg-sageDark-sage2">
       <div className="flex flex-row items-center gap-6">
         <SwordsIcon className="h-10 w-10 fill-teal-teal9 stroke-teal-teal9 dark:fill-tealDark-teal9 dark:stroke-tealDark-teal9" />
-        <h1 className="text-xl font-bold">Dailies</h1>
+        <h1 className="text-2xl font-medium">Dailies</h1>
       </div>
       <div className="flex flex-row items-center gap-6">
         <nav className="flex flex-row gap-6">
-          <NavLink to="habits">Habits</NavLink>
+          <NavLink
+            className={({ isActive, isPending }) =>
+              isPending
+                ? "border-spacing-1 border-b-2 border-teal-teal6 dark:border-tealDark-teal6"
+                : isActive
+                ? "border-spacing-1 border-b-2 border-teal-teal8 dark:border-tealDark-teal8"
+                : ""
+            }
+            to="habits"
+          >
+            Habits
+          </NavLink>
           <Link
             to="https://github.com/shivan-vickers/habit-tracker"
             reloadDocument
