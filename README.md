@@ -1,5 +1,7 @@
 # Habit Tracker
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/768366c1-e6a9-4c33-9db2-8a71998c2064/deploy-status)](https://app.netlify.com/sites/resonant-elf-7bdb22/deploys)
+
 This project is an attempt to learn the Remix framework and my first solo attempt at making a full stack web application. At the moment it's just a Google Keep clone but eventually I'd like it to be used to track the development of habits and display your progress similar to applications like [Habitica](https://habitica.com/static/home) and [Fabulous](https://www.thefabulous.co).
 
 CHANGELOG.md is where I am writing the project roadmap.
