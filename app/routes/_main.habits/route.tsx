@@ -1,16 +1,14 @@
-import type { ActionArgs, LoaderArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { type ActionArgs, type LoaderArgs, json } from "@remix-run/node";
 import {
   useLoaderData,
   useRouteError,
   isRouteErrorResponse,
 } from "@remix-run/react";
-
-import type { Habit } from "@prisma/client";
 import { Masonry } from "react-plock";
 
-import type { ErrorMessage } from "~/components/ErrorContainer";
-import { ErrorContainer } from "~/components/ErrorContainer";
+import { AddGroupBox } from "./AddGroupBox";
+import { HabitGroupView } from "./HabitGroupView";
+import { ErrorContainer, type ErrorMessage } from "~/components/ErrorContainer";
 import {
   createHabitGroup,
   deleteHabitGroupById,
@@ -18,13 +16,12 @@ import {
   updateHabitGroupById,
 } from "~/models/habit-group.server";
 import {
+  type Habit,
   createHabit,
   deleteHabitById,
   getHabitsByGroupId,
   updateHabitById,
 } from "~/models/habit.server";
-import { AddGroupBox } from "~/routes/_main.habits/AddGroupBox";
-import { HabitGroupView } from "~/routes/_main.habits/HabitGroupView";
 import { requireUserId } from "~/utils/session.server";
 import { badRequest } from "~/utils/utils";
 

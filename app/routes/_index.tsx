@@ -1,5 +1,8 @@
-import { redirect } from "@remix-run/node";
-import type { LoaderArgs, V2_MetaFunction } from "@remix-run/node";
+import {
+  type LoaderArgs,
+  type V2_MetaFunction,
+  redirect,
+} from "@remix-run/node";
 
 import { requireUserId } from "~/utils/session.server";
 

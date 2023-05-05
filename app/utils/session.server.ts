@@ -1,7 +1,6 @@
 import { createCookieSessionStorage, redirect } from "@remix-run/node";
 
-import type { User } from "@prisma/client";
-import { getUserById } from "../models/user.server";
+import { type User, getUserById } from "~/models/user.server";
 
 const sessionSecret = process.env.SESSION_SECRET;
 if (!sessionSecret) {

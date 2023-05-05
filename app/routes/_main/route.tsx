@@ -1,7 +1,6 @@
 import { Outlet, isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
-import type { ErrorMessage } from "~/components/ErrorContainer";
-import { ErrorContainer } from "~/components/ErrorContainer";
+import { type ErrorMessage, ErrorContainer } from "~/components/ErrorContainer";
 import { Header } from "./Header";
 
 export default function Main() {

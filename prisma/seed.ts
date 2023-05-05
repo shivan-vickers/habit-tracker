@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-import type { Prisma } from "@prisma/client";
+import { type Prisma, PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();

@@ -1,5 +1,4 @@
-import type { LinksFunction, LoaderArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { type LinksFunction, type LoaderArgs, json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -11,8 +10,7 @@ import {
   useRouteError,
 } from "@remix-run/react";
 
-import type { ErrorMessage } from "./components/ErrorContainer";
-import { ErrorContainer } from "./components/ErrorContainer";
+import { type ErrorMessage, ErrorContainer } from "./components/ErrorContainer";
 import stylesheet from "./styles/tailwind.css";
 import { getUser } from "./utils/session.server";
 
