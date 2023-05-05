@@ -1,7 +1,7 @@
 import type { HabitGroup, User } from "@prisma/client";
 import { prisma } from "~/utils/prisma.server";
 
-export type { Habit } from "@prisma/client";
+export type { HabitGroup } from "@prisma/client";
 
 export async function createHabitGroup(
   name: HabitGroup["name"],
