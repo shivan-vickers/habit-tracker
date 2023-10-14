@@ -1,6 +1,6 @@
 # Habit Tracker
 
-This project is an attempt to learn the Remix framework and my first solo attempt at making a full stack web application. At the moment it's just a Google Keep clone but eventually I'd like it to be used to track the development of habits and display your progress similar to applications like [Habitica](https://habitica.com/static/home) and [Fabulous](https://www.thefabulous.co).
+This project was undertaken to learn and play with the Remix framework. At the moment it's just a Google Keep clone but eventually I'd like it to be used to track the development of habits and display your progress similar to applications like [Habitica](https://habitica.com/static/home) and [Fabulous](https://www.thefabulous.co).
 
 CHANGELOG.md is where I am writing the project roadmap.
 
