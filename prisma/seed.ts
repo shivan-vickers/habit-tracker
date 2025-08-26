@@ -19,6 +19,8 @@ const habitsData: Prisma.HabitCreateWithoutGroupInput[] = [
 ];
 
 async function main() {
+  await prisma.user.delete({ where: { username: "shva" } });
+
   const hashedPassword = await bcrypt.hash("admin", 10);
 
   const userData: Prisma.UserCreateInput = {
