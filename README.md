@@ -1,15 +1,17 @@
 # Habit Tracker
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/768366c1-e6a9-4c33-9db2-8a71998c2064/deploy-status)](https://app.netlify.com/sites/resonant-elf-7bdb22/deploys)
-
 This project is an attempt to learn the Remix framework and my first solo attempt at making a full stack web application. At the moment it's just a Google Keep clone but eventually I'd like it to be used to track the development of habits and display your progress similar to applications like [Habitica](https://habitica.com/static/home) and [Fabulous](https://www.thefabulous.co).
 
-CHANGELOG.md is where I am writing the project roadmap.
+CHANGELOG.md is where I am writing the project roadmap for now.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/768366c1-e6a9-4c33-9db2-8a71998c2064/deploy-status)](https://app.netlify.com/sites/resonant-elf-7bdb22/deploys)
+![Last Commit](https://img.shields.io/github/last-commit/shivan-vickers/habit-tracker)
+![License](https://img.shields.io/github/license/shivan-vickers/habit-tracker)
 
 ## What's in the stack
 
 - App deployment with [Netlify](https://www.netlify.com)
-- Database with [SQLite](https://sqlite.org)
+- Database with [Supabase](https://supabase.com)
 - Username/Password Authentication with [cookie-based sessions](https://remix.run/utils/sessions#md-createcookiesessionstorage)
 - Database ORM with [Prisma](https://prisma.io)
 - Styling with [Tailwind](https://tailwindcss.com/)
@@ -19,12 +21,12 @@ CHANGELOG.md is where I am writing the project roadmap.
 - Schema validation with [Zod](https://zod.dev)
 - Form validation with [Remix Validated Form](https://www.remix-validated-form.io)
 - Components from [Headless UI](https://headlessui.com)
-- Colors from [Radix UI](https://www.radix-ui.com/colors)
+- Components and colours from [Radix UI](https://www.radix-ui.com)
 - Icons from [Lucide](https://lucide.dev)
 
 ## Development
 
-Remix requires at least Node version `14` but I am using the current LTS version of Node which is `18.16.0` for testing and development. I recommend [NVM for Windows](https://github.com/coreybutler/nvm-windows):
+Remix requires at least Node version `14` but I am using the current LTS version of Node which is `18.16.0` during testing and development. I recommend using a version manager such as nvm:
 
 ```sh
 nvm use 18.16.0
@@ -42,7 +44,7 @@ To set up the dev environment you first need to create the database. Run the fol
 npx prisma migrate reset
 ```
 
-If Intellisense it's giving you autocompletes for the database models the try:
+If Intellisense isn't giving you autocompletes for the database models the try:
 
 ```sh
 npx prisma generate
